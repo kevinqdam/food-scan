@@ -5,7 +5,7 @@ type NonEmptyNumericString6To12Brand = {
   readonly NonEmptyNumericString6To12: unique symbol
 }
 
-const nonEmptyNumericStringPattern = /[0-9]+/;
+const nonEmptyNumericStringPattern = /^[0-9]+$/;
 const NonEmptyNumericString6To12Codec = t.brand(
   t.string,
   (s: string): s is t.Branded<string, NonEmptyNumericString6To12Brand> => (
