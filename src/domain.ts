@@ -16,7 +16,7 @@ const NonEmptyNumericString6To12Codec = t.brand(
 
 const BarcodeCodec = withMessage(
   NonEmptyNumericString6To12Codec,
-  (input) => `Barcode value must be a string (size between 6 and 12 characters), got: ${input}`,
+  (input) => `Barcode value must be a numeric string (length from 6 through 12 characters), got: ${input}`,
 );
 
 type Barcode = t.TypeOf<typeof BarcodeCodec>;
