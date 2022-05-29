@@ -1,21 +1,20 @@
 import * as t from 'io-ts';
 import { withMessage } from 'io-ts-types';
 
-type NonEmptyNumericString6To12Brand = {
-  readonly NonEmptyNumericString6To12: unique symbol
+type BarcodeBrand = {
+  readonly Barcode: unique symbol
 }
 
-const nonEmptyNumericStringPattern = /^[0-9]+$/;
-const NonEmptyNumericString6To12Codec = t.brand(
-  t.string,
-  (s: string): s is t.Branded<string, NonEmptyNumericString6To12Brand> => (
-    (s.length >= 6) && (s.length <= 12) && nonEmptyNumericStringPattern.test(s)
-  ),
-  'NonEmptyNumericString6To12',
-);
+const nonEmptyNumericStringPattern: RegExp = /^[0-9]+$/;
 
-const BarcodeCodec = withMessage(
-  NonEmptyNumericString6To12Codec,
+const BarcodeCodec: t.BrandC<t.StringC, BarcodeBrand> = withMessage(
+  t.brand(
+    t.string,
+    (s: string): s is t.Branded<string, BarcodeBrand> => (
+      (s.length >= 6) && (s.length <= 12) && nonEmptyNumericStringPattern.test(s)
+    ),
+    'Barcode',
+  ),
   (input) => `Barcode value must be a numeric string (length from 6 through 12 characters), got: ${input}`,
 );
 
