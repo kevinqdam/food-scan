@@ -1,7 +1,7 @@
 import { match } from 'fp-ts/lib/Either';
 import { flow } from 'fp-ts/lib/function';
 import { ValidationError } from 'io-ts';
-import { BarcodeCodec, Barcode } from '../../src/domain';
+import { BarcodeCodec, Barcode } from '../../src/domain/barcode';
 
 const returnErrors = (errors: Array<ValidationError>) => errors.map((error: ValidationError) => error.message).join(', ');
 const returnEncoding = (barcode: Barcode) => BarcodeCodec.encode(barcode);
