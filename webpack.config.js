@@ -20,8 +20,8 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        test: /\.(s)?css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
     ]
   },
