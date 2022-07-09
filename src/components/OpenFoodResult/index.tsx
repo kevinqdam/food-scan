@@ -8,7 +8,6 @@ type OpenFoodResultProps = {
 const OpenFoodResult = function (props: OpenFoodResultProps) {
   const {
     apiPayload: {
-      code,
       product: {
         product_name: productName,
         ingredients_analysis_tags: ingredientsAnalysisTags,
