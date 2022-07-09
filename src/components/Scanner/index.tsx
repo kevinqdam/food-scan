@@ -22,7 +22,14 @@ const drawRedLineThroughCode = (data: QuaggaData, ctx: CanvasRenderingContext2D)
   Quagga.ImageDebug.drawPath(data.line, { x: 'x', y: 'y' }, ctx, { color: 'red', lineWidth: 3 });
 };
 
-const Scanner = function () {
+type ScannerProps = {
+  setIsScanning: React.Dispatch<React.SetStateAction<boolean>>;
+  setBarcodeLike: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Scanner = function (props: ScannerProps) {
+  const { setIsScanning, setBarcodeLike } = props;
+
   useEffect(() => {
     Quagga.init(
       scannerConfig,
@@ -44,11 +51,13 @@ const Scanner = function () {
       drawGreenBoxesAroundCodeLikes(data, drawingCtx);
     });
     Quagga.onDetected((data: QuaggaData) => {
-      if (!data || !data.codeResult) return;
+      if (!data?.codeResult?.code) return;
 
       const drawingCtx: CanvasRenderingContext2D = Quagga.canvas.ctx.overlay;
       drawRedLineThroughCode(data, drawingCtx);
-      console.log(data);
+      setBarcodeLike(data.codeResult.code);
+      Quagga.stop();
+      setIsScanning(false);
     });
   }, []);
 
