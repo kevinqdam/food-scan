@@ -6,20 +6,16 @@ type OpenFoodResultProps = {
 };
 
 const OpenFoodResult = function (props: OpenFoodResultProps) {
-  const {
-    apiPayload: {
-      product: {
-        product_name: productName,
-        ingredients_analysis_tags: ingredientsAnalysisTags,
-      }
-    }
-  } = props;
+  const { apiPayload } = props;
 
   return (
-    <div>
-      {productName}
-      <div>{JSON.stringify(ingredientsAnalysisTags, null, 4)}</div>
-    </div>
+    ((apiPayload.status === 0)
+      ? <div>Product not found for code: <b>{apiPayload.code}</b></div>
+      : <div>
+        {apiPayload!.product!.product_name}
+        <div>{JSON.stringify(apiPayload.product!.ingredients_analysis_tags, null, 4)}</div>
+      </div>
+    )
   )
 };
 
