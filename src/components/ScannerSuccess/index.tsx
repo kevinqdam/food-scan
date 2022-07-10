@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Barcode, BarcodeParser } from '../../domain/barcode';
+import { Barcode } from '../../domain/barcode';
 import OpenFoodResult from '../OpenFoodResult';
 import { OpenFoodApiPayloadParser } from '../OpenFoodResult/types';
 
@@ -15,20 +15,20 @@ const ScannerSuccess = function (props: ScannerSuccessProps) {
   const [ apiPayload, setApiPayload ]  = useState(null);
 
   const fetchFactsForBarcode = async function (barcode: Barcode) {
-    const barcodeString = barcode;
-    const response = await fetch(`${API_ENDPOINT}/${barcodeString}`);
+    const response = await fetch(`${API_ENDPOINT}/${barcode}`);
     const payload = await response.json();
-    if (OpenFoodApiPayloadParser.safeParse(payload).success) {
-      setApiPayload(payload);
-    }
+    setApiPayload(payload);
   };
 
-  fetchFactsForBarcode(barcode);
+  if (!apiPayload) {
+    fetchFactsForBarcode(barcode);
+  }
 
   return (
     <div>
       {!apiPayload && <div>Looking up barcode: <b>{barcode}</b>...</div>}
-      {apiPayload && <OpenFoodResult apiPayload={apiPayload} />}
+      {apiPayload && OpenFoodApiPayloadParser.safeParse(apiPayload).success && <OpenFoodResult apiPayload={apiPayload} />}
+      {apiPayload && !OpenFoodApiPayloadParser.safeParse(apiPayload).success && <div>{JSON.stringify(OpenFoodApiPayloadParser.safeParse(apiPayload))}</div>}
     </div>
   )
 };
