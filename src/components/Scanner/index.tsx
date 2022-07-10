@@ -59,6 +59,8 @@ const Scanner = function (props: ScannerProps) {
       Quagga.stop();
       setIsScanning(false);
     });
+
+    return Quagga.stop();
   }, []);
 
   return (
