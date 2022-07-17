@@ -1,4 +1,7 @@
-const scannerConfig = {
+export const SCANNER_WIDTH = 640;
+export const SCANNER_HEIGHT = 480;
+
+export const scannerConfig = {
   inputStream: {
     type: 'LiveStream',
     constraints: {
@@ -18,5 +21,3 @@ const scannerConfig = {
   drawBoundingBox: true,
   locate: true,
 }
-
-export default scannerConfig

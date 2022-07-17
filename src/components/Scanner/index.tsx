@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import type QuaggaData from './types/QuaggaData';
 import './styles.scss';
-import scannerConfig from './config';
+import { scannerConfig, SCANNER_WIDTH, SCANNER_HEIGHT } from './config';
 
 const Quagga = require('quagga');
 
