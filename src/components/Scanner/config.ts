@@ -3,7 +3,8 @@ import { z } from 'zod';
 export const SCANNER_WIDTH = 640;
 export const SCANNER_HEIGHT = 480;
 
-type Reader = 'code_128_reader'
+type Reader =
+  | 'code_128_reader'
   | 'ean_reader'
   | 'ean_8_reader'
   | 'code_39_reader'
@@ -27,13 +28,13 @@ type ScannerConfig = {
       height: number;
       facingMode: 'environment';
       deviceId?: string;
-    },
+    };
     area?: {
       top: string;
       right: string;
       left: string;
       bottom: string;
-    }
+    };
     singleChannel?: false;
   };
   frequency: number;
@@ -62,8 +63,8 @@ type ScannerConfig = {
         showTransformed?: boolean;
         showTransformedBox?: boolean;
         showBB?: boolean;
-      }
-    }
+      };
+    };
   };
   debug?: boolean;
 };
@@ -92,4 +93,4 @@ export const scannerConfig: ScannerConfig = {
     halfSample: true,
     patchSize: 'medium',
   },
-}
+};

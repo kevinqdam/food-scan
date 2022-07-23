@@ -1,5 +1,5 @@
 import React from 'react';
-import { Barcode, BarcodeParser } from '../../domain/barcode';
+import { BarcodeParser } from '../../domain/barcode';
 import ScannerFailure from '../ScannerFailure';
 import ScannerSuccess from '../ScannerSuccess';
 
@@ -9,13 +9,15 @@ type ScannerResultProps = {
 
 const ScannerResult = function (props: ScannerResultProps) {
   const { barcodeLike } = props;
-  
+
   const parseResult = BarcodeParser.safeParse(barcodeLike);
-  
-  return (
-    (!parseResult.success)
-    ? <ScannerFailure errors={parseResult.error.issues.map((issue) => issue.message)} />
-    : <ScannerSuccess barcode={parseResult.data}/>
+
+  return !parseResult.success ? (
+    <ScannerFailure
+      errors={parseResult.error.issues.map((issue) => issue.message)}
+    />
+  ) : (
+    <ScannerSuccess barcode={parseResult.data} />
   );
 };
 

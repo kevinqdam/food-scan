@@ -10,13 +10,10 @@ const ScannerContainer = function () {
   const [barcodeLike, setBarcodeLike] = useState('');
 
   return (
-    <div className="flex flex-col items-center space-y-6">
-      <div
-        className="flex flex-col items-center"
-        style={scannerViewportStyle}
-      >
+    <div className='flex flex-col items-center space-y-6'>
+      <div className='flex flex-col items-center' style={scannerViewportStyle}>
         {isScanning && (
-          <div className="absolute block z-10">
+          <div className='absolute block z-10'>
             <Scanner
               setIsScanning={setIsScanning}
               setBarcodeLike={setBarcodeLike}
@@ -25,7 +22,7 @@ const ScannerContainer = function () {
         )}
         <div
           style={{ height: SCANNER_HEIGHT, width: SCANNER_WIDTH }}
-          className="absolute block bg-black z-0"
+          className='absolute block bg-black z-0'
         ></div>
       </div>
       <button
