@@ -64,7 +64,7 @@ const Scanner = function (props: ScannerProps) {
   }, []);
 
   return (
-    <div id="interactive" className="viewport" />
+    <div id="interactive" className="z-0 viewport" />
   );
 };
 

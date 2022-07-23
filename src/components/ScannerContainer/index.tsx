@@ -3,25 +3,31 @@ import Scanner from '../Scanner';
 import { SCANNER_HEIGHT, SCANNER_WIDTH } from '../Scanner/config';
 import ScannerResult from '../ScannerResult';
 
+const scannerViewportStyle = { height: SCANNER_HEIGHT, width: SCANNER_WIDTH };
+
 const ScannerContainer = function () {
   const [isScanning, setIsScanning] = useState(false);
   const [barcodeLike, setBarcodeLike] = useState('');
 
   return (
-    <>
-      {(isScanning && (
-        <Scanner
-          setIsScanning={setIsScanning}
-          setBarcodeLike={setBarcodeLike}
-        />
-      )) || (
+    <div className="flex flex-col items-center space-y-6">
+      <div
+        className="flex flex-col items-center"
+        style={scannerViewportStyle}
+      >
+        {isScanning && (
+          <div className="absolute block z-10">
+            <Scanner
+              setIsScanning={setIsScanning}
+              setBarcodeLike={setBarcodeLike}
+            />
+          </div>
+        )}
         <div
           style={{ height: SCANNER_HEIGHT, width: SCANNER_WIDTH }}
-          className='block bg-black'
-        >
-          tests
-        </div>
-      )}
+          className="absolute block bg-black z-0"
+        ></div>
+      </div>
       <button
         onClick={() => setIsScanning(!isScanning)}
         className={[
@@ -35,8 +41,10 @@ const ScannerContainer = function () {
       >
         {isScanning ? 'Stop' : 'Scan'}
       </button>
-      {!isScanning && barcodeLike && <ScannerResult barcodeLike={barcodeLike} />}
-    </>
+      {!isScanning && barcodeLike && (
+        <ScannerResult barcodeLike={barcodeLike} />
+      )}
+    </div>
   );
 };
 
